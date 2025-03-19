@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Flores Desabrochando</title>
+  <style>
+    /* Remove margens e esconde barras de rolagem */
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: #f0f8ff;
+    }
+
+    /* Estilo do botão fixo */
+    #botao {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      z-index: 1000;
+      cursor: pointer;
+    }
+
+    /* Cada flor será um div contendo um <img> */
+    .flower {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      animation: bloom 2s ease-out forwards;
+      transform-origin: center center;
+    }
+
+    /* Faz a imagem ocupar todo o espaço do div */
+    .flower img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* Animação de "desabrochar": de escala 0 até a escala final */
+    @keyframes bloom {
+      0% {
+        transform: scale(0);
+        opacity: 0;
+      }
+      50% {
+        transform: scale(1.2);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button id="botao" onclick="bloomFlowers()">Flores!</button>
+
+  <script>
+    function bloomFlowers() {
+      // Define quantas flores serão geradas
+      const numFlowers = 50; // Ajuste conforme desejar
+
+      for (let i = 0; i < numFlowers; i++) {
+        // Cria um elemento div que representará a "flor"
+        const flowerDiv = document.createElement("div");
+        flowerDiv.classList.add("flower");
+
+        // Cria um elemento <img> para inserir a imagem da flor
+        const flowerImg = document.createElement("img");
+        // Substitua a URL abaixo pela imagem de flor que você quiser usar
+        flowerImg.src = "https://png.pngtree.com/png-clipart/20210309/original/pngtree-pink-color-flower-design-png-png-image_5869815.png";
+        flowerImg.alt = "Flor";
+
+        // Anexa a imagem ao div
+        flowerDiv.appendChild(flowerImg);
+
+        // Define um tamanho aleatório (entre 40px e 80px, por exemplo)
+        const size = 40 + Math.random() * 40;
+        flowerDiv.style.width = size + "px";
+        flowerDiv.style.height = size + "px";
+
+        // Posiciona a flor de forma aleatória na tela
+        const posX = Math.random() * (window.innerWidth - size);
+        const posY = Math.random() * (window.innerHeight - size);
+        flowerDiv.style.left = posX + "px";
+        flowerDiv.style.top = posY + "px";
+
+        // Delay aleatório para a animação
+        flowerDiv.style.animationDelay = Math.random() * 1 + "s";
+
+        // Adiciona a flor à página
+        document.body.appendChild(flowerDiv);
+      }
+    }
+  </script>
+</body>
+</html>
